@@ -1,5 +1,7 @@
 # theATL.social Backend Infrastructure
 
+## __Update: This doc is a bit out-of-date as of 12/23! Will update as soon as I have an opportunity.__
+
 ## About
 
 This document is a combination of my notes taken while setting up theATL.social, and the general outline of how I established the server. The intended reader of this document are those:
