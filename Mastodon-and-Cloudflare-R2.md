@@ -41,7 +41,7 @@ Note: These steps have only been tested on a Linux/MacOS computer, and not Windo
 7. __Recommended__: Upload a file manually via the Cloudflare UI, and then see if you can acess the file via your custom domain, using your web browser. If you can access the file, you're almost done!
 8. [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)! The reason why the AWS CLI is a prerequisite is because we are going to use that service to set our CORS setting on our R2 bucket.
 9. Go to a terminal/command line. At the command line, presuming that the `aws` command from the AWS CLI is now in your `PATH`, type: `aws configure`. You will be prompted for the `Access Key` and `Secret` that you received from enabling the Cloudflare R2 API. For region and other values, use the default values.
-10. Copy the file `recommended_r2_cors.json` from this repo into your working folder. (Review this JSON file first - you may want to limit the origin to your primary Mastodon server domain. If not, the file will work as-is)
+10. Copy the file [`recommended_r2_cors.json`](https://github.com/theatl-social/technical-docs/blob/main/recommended_cors.json) from this repo into your working folder. (Review this JSON file first - you may want to limit the origin to your primary Mastodon server domain. If not, the file will work as-is)
 11. Collect your Cloudfront Account ID. This ID is located on your `R2` page in the Cloudfront Control Pnael.
 12. We will now be using the AWS CLI to set the CORS setting for the R2 bucket. At the command line, input the following (replacing the values in the brackets with the approproiate values).
 ```
