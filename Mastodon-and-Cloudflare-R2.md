@@ -25,6 +25,7 @@ When I evaluating the options for Block Storage, I chose (Cloudflare's R2 Servic
 2. CloudFlare Account (Free account is OK) with R2 service activated (requires billing method)
 3. [AWS CLI](https://aws.amazon.com/cli/)
 4. Optional - Existing local storage or block store from which data will be transferred into R2
+5. rclone - Utility to copy from local storage (or AWS S3 or DigitalOcean, etc.) to R2
 
 Note: These steps have only been tested on a Linux/MacOS computer, and not Windows.
 
@@ -50,4 +51,28 @@ aws s3api put-bucket-cors --bucket <BUCKET NAME> --endpoint-url https://<CLOUDFL
 
 ## Step 2: Configure Mastodon to Utilize the Bucket
 
+Mastodon settings are stored in environment variables, or `dotenv` files, or through other means. The following instructions are agnostic as to how you are setting your environment variables.
 
+1. Input the following Mastodon variables into your Mastodon Stack, replacing the instructions in the brackets with the respective values:
+```
+S3_ENABLED=true
+S3_BUCKET=<YOUR BUCKET NAME -- NOT YOUR CUSTOM DOMAIN NAME>
+S3_ENDPOINT=https://<YOUR CLOUDFLARE ACCOUNT ID>.r2.cloudflarestorage.com
+S3_ALIAS_HOST=<YOUR CUSTOM DOMAIN NAME>
+S3_PERMISSION=private
+AWS_ACCESS_KEY_ID=<YOUR ACCESS KEY>
+AWS_SECRET_ACCESS_KEY=<YOUR SECRET ACCESS KEY>
+```
+
+Now, restart your instance, and everything should now work OK! 
+
+## Optional Step 3: Copy files over from an existing object store
+
+__Important__: The folder/directory structure must be precisely the same on the destination and origin object stores. 
+
+1. Make sure you have `rclone` installed. If you are using Homebrew, just type `brew install rclone`. If you are on a Linux distro without Homebrew, `rclone` may be available via a package manager.
+2. The [following instructions](https://forum.rclone.org/t/cloudflare-r2-now-working-with-rclone/30730) will show you how to configure `rclone` to access Cloudflare R2. Note that the instructions refer a beta version of `rclone`, however, the current stable version has this capacity.
+3. Repeat similar steps, depending on your source object store, to set up configuration on your source.
+4. Utilize `rclone sync <src> <dest>` to copy your files from one object store to another. Hint: use `--transfer` and `--checkers` to multi-thread the copy and transfer threads of the process. Documentation is here: `https://rclone.org/docs/`
+
+## Done!
