@@ -13,7 +13,7 @@ This storage method, however, is typically ill-advised because local or block st
 - _Block storage refers to storage such as Amazon Web Service's (AWS) Elastic Block store (EBS) or DigitalOcean's Volumns._
 - _Object storage refers to storage such as AWS S3, DigitalOcean Spaces, or Cloudflare R2_
 
-When I evaluating the options for Block Storage, I chose (Cloudflare's R2 Service)[https://www.cloudflare.com/products/r2/] due to its pricing model of free egress, low cost on read operations, and reasonable cost on write operations. More importantly, however, Cloudflare easily allows the serving of an object store via a custom domain on their platform. The data served is distributed to a CDN and cached appropriately, which in turn further lowers costs.
+When I evaluating the options for Block Storage, I chose [Cloudflare's R2 Service](https://www.cloudflare.com/products/r2/) due to its pricing model of free egress, low cost on read operations, and reasonable cost on write operations. More importantly, however, Cloudflare easily allows the serving of an object store via a custom domain on their platform. The data served is distributed to a CDN and cached appropriately, which in turn further lowers costs.
 
 ## Objective
 
@@ -23,7 +23,7 @@ When I evaluating the options for Block Storage, I chose (Cloudflare's R2 Servic
 
 1. Self-Hosted Mastodon Instance (not a hosted instance)
 2. CloudFlare Account (Free account is OK) with R2 service activated (requires billing method)
-3. [AWS CLI](https://aws.amazon.com/cli/)
+3. [AWS CLI](https://aws.amazon.com/cli/])
 4. Optional - Existing local storage or block store from which data will be transferred into R2
 5. rclone - Utility to copy from local storage (or AWS S3 or DigitalOcean, etc.) to R2
 
@@ -36,7 +36,7 @@ Note: These steps have only been tested on a Linux/MacOS computer, and not Windo
 2. Choose a descriptive name for your bucket, and click "Create Bucket"
 3. You have now created your object store! Now, return to the `R2` section on the main Cloudflare page.
 4. Create R2 API Tokens, then click "Create API Token". Add `Edit` _and_ `Write` Permissions. Copy the `Access Token` and `Token Secret` into a secure location.
-5. Connect the bucket to a custom domain (Cloudflare Documentation Instructions)[https://developers.cloudflare.com/r2/data-access/public-buckets/#custom-domains-configuration]
+5. Connect the bucket to a custom domain [Cloudflare Documentation Instructions](https://developers.cloudflare.com/r2/data-access/public-buckets/#custom-domains-configuration)
 6. Make sure you selected the option to create a DNS entry.
 7. __Recommended__: Upload a file manually via the Cloudflare UI, and then see if you can acess the file via your custom domain, using your web browser. If you can access the file, you're almost done!
 8. [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)! The reason why the AWS CLI is a prerequisite is because we are going to use that service to set our CORS setting on our R2 bucket.
